@@ -1,0 +1,48 @@
+###############################################
+## .NET / Visual Studio Específico
+###############################################
+# Carpetas de compilación (bin y obj en todos los niveles)
+**/bin/
+**/obj/
+**/out/
+
+# Archivos de configuración de Visual Studio y VS Code
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+###############################################
+## Dependencias y Paquetes
+###############################################
+# NuGet Packages
+*.nupkg
+**/packages/*
+!**/packages/build/
+# Si usas herramientas de Node en el futuro para el Ecommerce
+node_modules/
+
+###############################################
+## Configuración de Entorno (Seguridad)
+###############################################
+# No subir secretos ni configuraciones locales
+**/appsettings.Development.json
+**/appsettings.Local.json
+*.pubxml
+*.pubxml.user
+
+###############################################
+## Base de Datos Local y Logs
+###############################################
+*.mdf
+*.ldf
+*.log
+*.sqlite
+
+###############################################
+## Sistema Operativo
+###############################################
+.DS_Store
+Thumbs.db
