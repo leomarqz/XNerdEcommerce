@@ -3,7 +3,7 @@ using XNerd.Ecommerce.Domain.Common;
 
 namespace XNerd.Ecommerce.Domain.Models
 {
-    public class OrderAddress : BaseDomainModel
+    public class OrderAddress
     {
         public string? Street { get; set; } // Calle, Avenida, etc.
         public string? City { get; set; }

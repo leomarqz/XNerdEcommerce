@@ -28,7 +28,7 @@ namespace XNerd.Ecommerce.Domain.Models
         public string? BuyerName { get; set; }
         public string? BuyerUsername { get; set; }
         public OrderAddress? ShippingAddress { get; set; }
-        public IReadOnlyList<OrderItem> Items { get; set; } = new List<OrderItem>();
+        public IReadOnlyList<OrderItem>? Items { get; set; }
         public decimal SubTotal { get; set; } // Total before taxes and discounts
         public decimal Tax { get; set; } // Applied taxes
         public decimal ShippingCost { get; set; } 
