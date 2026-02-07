@@ -9,5 +9,6 @@ namespace XNerd.Ecommerce.Domain.Models
         public int Rating { get; set; } // Calificación
         public string? Comment { get; set; } // Comentario
         public int ProductId { get; set; } // Foreign key
+        public virtual Product? Product { get; set; }
     }
 }
