@@ -10,7 +10,7 @@ namespace XNerd.Ecommerce.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<OrderItem> builder)
         {
-            builder.Property((item)=> item.Price).HasColumnType("decimal(18,2)");
+            builder.Property((item)=> item.Price).HasColumnType("decimal(10,2)");
         }
     }
 }
