@@ -7,6 +7,6 @@ namespace XNerd.Ecommerce.Application.Persistence
     public interface IUnitOfWork : IDisposable
     {
         IRepository<TEntity> Repository<TEntity>() where TEntity : class;
-        Task<int> SaveChangesAsync();
+        Task<int> Complete();
     }
 }

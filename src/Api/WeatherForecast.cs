@@ -1,3 +1,5 @@
+using System;
+
 namespace XNerd.Ecommerce.Api;
 
 public class WeatherForecast
