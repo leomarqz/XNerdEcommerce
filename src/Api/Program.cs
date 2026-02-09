@@ -12,13 +12,18 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+
 using XNerd.Ecommerce.Domain.Models;
+using XNerd.Ecommerce.Infrastructure;
 using XNerd.Ecommerce.Infrastructure.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //---------------------------------------------------------------------
+
+builder.Services.AddInfrastructureServices( builder.Configuration );
+
 builder.Services.AddDbContext<EcommerceDbContext>((options) =>
 {
     var cnnStr = builder.Configuration.GetConnectionString("DefaultConnection");

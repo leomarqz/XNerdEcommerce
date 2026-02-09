@@ -1,7 +1,10 @@
 
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-
+using XNerd.Ecommerce.Domain.Common;
 using XNerd.Ecommerce.Domain.Models;
 
 namespace XNerd.Ecommerce.Infrastructure.Persistence
@@ -10,6 +13,7 @@ namespace XNerd.Ecommerce.Infrastructure.Persistence
     {
         public EcommerceDbContext(DbContextOptions<EcommerceDbContext> options)
         : base(options){}
+
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -31,5 +35,30 @@ namespace XNerd.Ecommerce.Infrastructure.Persistence
             // Apply all configurations from the current assembly
             builder.ApplyConfigurationsFromAssembly(typeof(EcommerceDbContext).Assembly);
         }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            var username = "System";
+
+            foreach(var entry in ChangeTracker.Entries<BaseDomainModel>())
+            {
+                switch (entry.State)
+                {
+                    case EntityState.Added:
+                        entry.Entity.CreatedAt = DateTime.Now;
+                        entry.Entity.CreatedBy = username;
+                        break;
+                    case EntityState.Modified:
+                        entry.Entity.LastModifiedAt = DateTime.Now;
+                        entry.Entity.LastModifiedBy = username;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            return await base.SaveChangesAsync(cancellationToken);
+        }
+        
     }
 }
