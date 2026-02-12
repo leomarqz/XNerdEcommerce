@@ -46,13 +46,13 @@ namespace XNerd.Ecommerce.Infrastructure.Persistence
                         FirstName = "X",
                         LastName = "User",
                         Email = "x-user@gmail.com",
-                        UserName = "x-nerd",
+                        UserName = "x-User",
                         PhoneNumber = "56843948",
                         AvatarUrl = "https://firebasestorage.googleapis.com/v0/b/edificacion-app.appspot.com/o/avatar-1.webp?alt=media&token=58da3007-ff21-494d-a85c-25ffa758ff6d"
                     };
 
-                    await userManager.CreateAsync(admin, "$ABCuserX123&");
-                    await userManager.AddToRoleAsync(admin, Role.USER);
+                    await userManager.CreateAsync(user, "$ABCuserX123&");
+                    await userManager.AddToRoleAsync(user, Role.USER);
                     
                 }
 

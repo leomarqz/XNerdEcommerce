@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 using XNerd.Ecommerce.Domain.Models;
@@ -104,5 +105,31 @@ app.UseAuthorization();
 app.UseCors("CorsPolicy");
 
 app.MapControllers();
+
+using( var scope = app.Services.CreateScope())
+{
+    var service = scope.ServiceProvider;
+    var loggerFactory = service.GetRequiredService<ILoggerFactory>();
+
+    try
+    {
+        var context = service.GetRequiredService<EcommerceDbContext>();
+        var userManager = service.GetRequiredService<UserManager<User>>();
+        var roleManager = service.GetRequiredService<RoleManager<IdentityRole>>();
+
+        // Ejecuta las migraciones
+        await context.Database.MigrateAsync();
+
+        // Cargamos data por defecto
+        await EcommerceDbContextData.LoadDataAsync( context, userManager, roleManager, loggerFactory );
+
+    }
+    catch (System.Exception e)
+    {
+        var logger = loggerFactory.CreateLogger( typeof(Program) );
+        logger.LogError("Error al ejecutar la migracion inicial...");
+    }
+
+}
 
 app.Run();
