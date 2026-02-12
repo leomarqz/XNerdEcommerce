@@ -28,6 +28,11 @@ namespace XNerd.Ecommerce.Infrastructure.Persistence
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
         public DbSet<Country> Countries { get; set; }
 
+        protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+        {
+            // base.ConfigureConventions(configurationBuilder);
+            configurationBuilder.Properties<decimal>().HavePrecision(10,2);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
