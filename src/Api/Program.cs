@@ -124,7 +124,7 @@ using( var scope = app.Services.CreateScope())
         await EcommerceDbContextData.LoadDataAsync( context, userManager, roleManager, loggerFactory );
 
     }
-    catch (System.Exception e)
+    catch (System.Exception)
     {
         var logger = loggerFactory.CreateLogger( typeof(Program) );
         logger.LogError("Error al ejecutar la migracion inicial...");
