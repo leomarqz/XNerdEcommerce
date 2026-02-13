@@ -13,7 +13,7 @@ namespace XNerd.Ecommerce.Infrastructure.ImageCloudinary
     public class ImageManagementService : IImageManagementService
     {
         private readonly Cloudinary _cloudinary;
-
+        
         public ImageManagementService(IOptions<CloudinarySettings> cloudinarySettings)
         {
             var settings = cloudinarySettings.Value ?? 
@@ -30,7 +30,6 @@ namespace XNerd.Ecommerce.Infrastructure.ImageCloudinary
             var uploadImage = new ImageUploadParams
             {
                 File = new FileDescription( imageData.Name, imageData.ImageStream ),
-                Folder = "xnerd_ecommerce_products"
             };
 
             ImageUploadResult? uploadResult = await _cloudinary.UploadAsync( uploadImage );
